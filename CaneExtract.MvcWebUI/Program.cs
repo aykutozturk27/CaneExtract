@@ -1,7 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using CaneExtract.Business.DependencyResolvers.Autofac;
-using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +9,10 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterModule(new AutofacBusinessModule());
-    builder.RegisterModule(new AutofacValidationModule());
 });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddFluentValidationAutoValidation();
 
 var app = builder.Build();
 

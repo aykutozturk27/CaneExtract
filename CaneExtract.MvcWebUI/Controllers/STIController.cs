@@ -33,6 +33,7 @@ namespace CaneExtract.MvcWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
+                commodityCode = string.IsNullOrEmpty(commodityCode) ? "" : commodityCode;
                 var list = _sTIService.GetAllWithParameters(SqlProsedure.GetAllWithParameters,
                     new STIWithSTKParameterDto() { CommodityCode = commodityCode, StartDate = Convert.ToInt32(startDate.ToOADate()), EndDate = Convert.ToInt32(endDate.ToOADate()) });
                 if (list != null)
