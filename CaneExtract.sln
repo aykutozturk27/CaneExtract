@@ -3,15 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaneExtract.Core", "CaneExtract.Core\CaneExtract.Core.csproj", "{370A1F07-4546-4133-BD20-506AEC9C1098}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaneExtract.Core", "CaneExtract.Core\CaneExtract.Core.csproj", "{370A1F07-4546-4133-BD20-506AEC9C1098}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaneExtract.Entities", "CaneExtract.Entities\CaneExtract.Entities.csproj", "{CAE235A6-F815-473D-A31C-6091910C828C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaneExtract.Entities", "CaneExtract.Entities\CaneExtract.Entities.csproj", "{CAE235A6-F815-473D-A31C-6091910C828C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaneExtract.DataAccess", "CaneExtract.DataAccess\CaneExtract.DataAccess.csproj", "{72A28637-A42B-4558-B7DE-AE2308EF056F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaneExtract.DataAccess", "CaneExtract.DataAccess\CaneExtract.DataAccess.csproj", "{72A28637-A42B-4558-B7DE-AE2308EF056F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaneExtract.Business", "CaneExtract.Business\CaneExtract.Business.csproj", "{2E3E9D3E-674E-461C-AE2D-BE54641F026B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaneExtract.Business", "CaneExtract.Business\CaneExtract.Business.csproj", "{2E3E9D3E-674E-461C-AE2D-BE54641F026B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaneExtract.MvcWebUI", "CaneExtract.MvcWebUI\CaneExtract.MvcWebUI.csproj", "{D2FE97AA-2225-445E-B651-786EE061AEAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaneExtract.MvcWebUI", "CaneExtract.MvcWebUI\CaneExtract.MvcWebUI.csproj", "{D2FE97AA-2225-445E-B651-786EE061AEAC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{DBA70423-88F8-4EC6-A23F-E8AC319AD18D}"
+	ProjectSection(SolutionItems) = preProject
+		prosedur.txt = prosedur.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

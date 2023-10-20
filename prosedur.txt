@@ -1,0 +1,49 @@
+USE [Test]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetAllWithParameters]    Script Date: 19.10.2023 23:04:20 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Author, Aykut Öztürk>
+-- Create date: <Create Date, 19.10.2023>
+-- Description:	<Description, Ýstekleriçin hazýrlanmýþ prosedürdür.>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetAllWithParameters]
+	@CommodityCode nvarchar(250), --Mal Kodu
+	@StartDate int, -- Baþlangýç tarihi
+	@EndDate int -- Bitiþ Tarihi
+AS
+BEGIN
+	SELECT ROW_NUMBER() OVER (
+		ORDER BY si.Tarih
+		) AS SequenceNo --Sira No
+	,si.IslemTur AS TransactionType --Ýþlem Türü
+	,si.EvrakNo AS DocumentNo -- Evrak No
+	,si.Miktar AS Quantity -- Miktar
+	,CONVERT(VARCHAR(15), CAST(si.Tarih - 2 AS datetime), 104) AS [Date] --Tarih
+	,(
+		CASE 
+			WHEN si.IslemTur = 0
+				THEN si.Miktar
+			ELSE 0
+			END
+		) AS InputQuantity -- GirisMiktar
+	,(
+		CASE 
+			WHEN si.IslemTur = 1
+				THEN si.Miktar
+			ELSE 0
+			END
+		) AS OutputQuantity -- CikisMiktar
+	FROM STI si WITH (NOLOCK)
+	INNER JOIN STK sk WITH (NOLOCK) ON si.MalKodu = sk.MalKodu
+	Where si.Tarih Between @StartDate And @EndDate
+	And (si.MalKodu = @CommodityCode Or 1 = @CommodityCode)
+	ORDER BY Tarih ASC
+END
+GO
