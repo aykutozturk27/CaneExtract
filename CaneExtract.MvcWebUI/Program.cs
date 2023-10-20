@@ -1,15 +1,22 @@
-using CaneExtract.Business.Abstract;
-using CaneExtract.Business.Concrete.Managers;
-using CaneExtract.DataAccess.Abstract;
-using CaneExtract.DataAccess.Concrete.EntityFramework;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using CaneExtract.Business.DependencyResolvers.Autofac;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Add hosts to the container.
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+{
+    builder.RegisterModule(new AutofacBusinessModule());
+    builder.RegisterModule(new AutofacValidationModule());
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<ISTIDal, EfSTIDal>();
-builder.Services.AddSingleton<ISTIService, STIManager>();
+builder.Services.AddFluentValidationAutoValidation();
 
 var app = builder.Build();
 

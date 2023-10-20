@@ -1,6 +1,7 @@
 ﻿using CaneExtract.Business.Abstract;
 using CaneExtract.Business.Constants;
 using CaneExtract.Entities.Dtos;
+using CaneExtract.MvcWebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CaneExtract.MvcWebUI.Controllers
@@ -16,29 +17,31 @@ namespace CaneExtract.MvcWebUI.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            DateTime startDate = new DateTime(2016, 01, 01);
+            DateTime endDate = new DateTime(2018, 01, 01);
+            var list = _sTIService.GetAllWithParameters(SqlProsedure.GetAllWithParameters, 
+                new STIWithSTKParameterDto() { CommodityCode = "1", StartDate = Convert.ToInt32(startDate.ToOADate()), EndDate = Convert.ToInt32(endDate.ToOADate()) });
+            var result = new GeneralModel
+            {
+                STI = list
+            };
+            return View(result);
         }
 
         [HttpPost]
-        public IActionResult Index(STIWithSTKParameterDto sTIWithSTKParameterDto)
+        public ActionResult GetSTIByParameter(string commodityCode, DateTime startDate, DateTime endDate)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var list = _sTIService.GetAllWithParameters(SqlProsedure.GetAllWithParameters, sTIWithSTKParameterDto);
-                ViewBag.List = list;
-                if(list != null)
+                var list = _sTIService.GetAllWithParameters(SqlProsedure.GetAllWithParameters,
+                    new STIWithSTKParameterDto() { CommodityCode = commodityCode, StartDate = Convert.ToInt32(startDate.ToOADate()), EndDate = Convert.ToInt32(endDate.ToOADate()) });
+                if (list != null)
                 {
-                    return RedirectToAction("Detail", list);
+                    return Json(list);
                 }
-                return View(sTIWithSTKParameterDto);
+                return Json(list);
             }
-            return View(sTIWithSTKParameterDto);
-        }
-
-        public IActionResult Detail()
-        {
-            var list = ViewBag.List;
-            return View(list);
+            return Json(new object[] { "hata" });
         }
     }
 }

@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="7.1.0" />
+    <PackageReference Include="FluentValidation" Version="11.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CaneExtract.DataAccess\CaneExtract.DataAccess.csproj" />
   </ItemGroup>
 
