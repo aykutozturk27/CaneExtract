@@ -3,11 +3,11 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "jqueryui@1.13.2",
-      "destination": "wwwroot/lib/jqueryui/",
+      "library": "bootstrap-datepicker@1.10.0",
+      "destination": "wwwroot/lib/bootstrap-datepicker/",
       "files": [
-        "jquery-ui.min.js",
-        "themes/base/jquery-ui.min.css"
+        "js/bootstrap-datepicker.min.js",
+        "css/bootstrap-datepicker.min.css"
       ]
     }
   ]

@@ -4,12 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CaneExtract</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link href="~/lib/jqueryui/themes/base/jquery-ui.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/CaneExtract.MvcWebUI.styles.css" asp-append-version="true" />
+
+    @await Html.PartialAsync("_StylePartial")
+    @await Html.PartialAsync("_AngularJsScriptPartial")
 </head>
-<body>
+<body ng-app="myApp">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -42,10 +41,9 @@
             &copy; @DateTime.Now.Year - CaneExtract
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    @await Html.PartialAsync("_ScriptPartial")
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

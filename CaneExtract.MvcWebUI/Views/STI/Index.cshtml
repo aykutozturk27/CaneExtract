@@ -1,91 +1,75 @@
-﻿@model GeneralModel
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿<div ng-controller="STIController">
+    <div class="row col-md-12">
+        <div class="form-group col-md-3">
+            <label class="form-label">Mal Kodu</label>
+            <input type="text" id="txtCommodityCode" class="form-control" ng-model="stiWithSTKParameter.CommodityCode" placeholder="Mal Kodu" />
+        </div>
+        <div class="form-group col-md-3">
+            <label class="form-label">Başlangıç Tarihi</label>
+            <input type="text" id="dtpStartDate" class="form-control" ng-model="stiWithSTKParameter.StartDate" ng-change="changeDate(stiWithSTKParameter.StartDate)" />
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="form-label">Bitiş Tarihi</label>
+            <input type="text" id="dtpEndDate" class="form-control" ng-model="stiWithSTKParameter.EndDate" ng-change="changeDate(stiWithSTKParameter.EndDate)" />
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
+        </div>
 
-<div class="form-group row">
-    <label asp-for="STIWithSTKParameter.CommodityCode" class="col-sm-4 form-label">Mal Kodu</label>
-    <div class="col-sm-8">
-        <input type="text" id="txtCommodityCode" class="form-control" asp-for="STIWithSTKParameter.CommodityCode" placeholder="Mal Kodu" />
+        <div class="form-group col d-grid">
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="loadStiList()">Listele</button>
+        </div>
+    </div>
+
+    <div class="row col mt-5">
+        <div class="table table-responsive">
+            <div class="tile-body p-10">
+                <div class="row">
+                    <div class="col-sm-12 table-responsive">
+                        <div class="row form-horizontal form-group-sm">
+                            <div class="col-sm-12">
+                                <div loading-container="tableStiParams.settings().$loading">
+                                    <table ng-table="tableStiParams" class="table table-condensed table-bordered table-striped" ng-form="tableStiForm" disable-filter="isAdding" demo-tracked-table="tableTracker">
+                                        <tr ng-repeat="row in $data" ng-form="rowStiForm" demo-tracked-table-row="row">
+                                            <td data-title="'Sıra No'" filter="{SequenceNo: 'text'}" sortable="'SequenceNo'" ng-switch="row.isEditing" ng-class="SequenceNo.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="SequenceNo" demo-tracked-table-cell>
+                                                <span ng-switch-default class="editable-text">{{row.SequenceNo}}</span>
+                                            </td>
+                                            <td data-title="'İşlem Türü'" filter="{TransactionType: 'text'}" sortable="'TransactionType'" ng-switch="row.isEditing" ng-class="TransactionType.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="TransactionType" demo-tracked-table-cell>
+                                                <span ng-switch-default class="editable-text">{{row.TransactionType}}</span>
+                                            </td>
+                                            <td data-title="'Evrak No'" filter="{DocumentNo: 'text'}" sortable="'DocumentNo'" ng-switch="row.isEditing" ng-class="DocumentNo.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="DocumentNo" demo-tracked-table-cell>
+                                                <span ng-switch-default class="editable-text">{{row.DocumentNo}}</span>
+                                            </td>
+                                            <td data-title="'Miktar'" filter="{Quantity: 'text'}" sortable="'Quantity'" ng-switch="row.isEditing" ng-class="Quantity.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="Quantity" demo-tracked-table-cell>
+                                                <span ng-switch-default class="editable-text">{{row.Quantity}}</span>
+                                            </td>
+                                            <td data-title="'Tarih'" filter="{Date: 'text'}" sortable="'Date'" ng-switch="row.isEditing" ng-class="Date.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="Date" demo-tracked-table-cell>
+                                                <span ng-switch-default class="editable-text">{{row.Date | date:'dd-MM-yyyy hh:MM'}}</span>
+                                            </td>
+                                            <td data-title="'GirişMiktar'" filter="{InputQuantity: 'text'}" sortable="'InputQuantity'" ng-switch="row.isEditing" ng-class="InputQuantity.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="InputQuantity" demo-tracked-table-cell>
+                                                <span ng-switch-default class="editable-text">{{row.InputQuantity}}</span>
+                                            </td>
+                                            <td data-title="'CikişMiktar'" filter="{OutputQuantity: 'text'}" sortable="'OutputQuantity'" ng-switch="row.isEditing" ng-class="OutputQuantity.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="OutputQuantity" demo-tracked-table-cell>
+                                                <span ng-switch-default class="editable-text">{{row.OutputQuantity}}</span>
+                                            </td>
+                                            <td data-title="'Stok'" filter="{Stock: 'text'}" sortable="'Stock'" ng-switch="row.isEditing" ng-class="Stock.$dirty ? 'bg-warning text-center' : 'text-center'" ng-form="Stock" demo-tracked-table-cell>
+                                                <span ng-switch-default class="editable-text">{{row.Stock}}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="form-group row mt-3">
-    <label asp-for="STIWithSTKParameter.StartDate" class="col-sm-4 form-label">Başlangıç Tarihi</label>
-    <div class="col-sm-8">
-        <input type="text" id="datepickerStartDate" class="form-control" asp-for="STIWithSTKParameter.StartDate" placeholder="Başlangıç Tarihi" />
-    </div>
-</div>
-<div class="form-group row mt-3">
-    <label asp-for="STIWithSTKParameter.EndDate" class="col-sm-4 form-label">Bitiş Tarihi</label>
-    <div class="col-sm-8">
-        <input type="text" id="datepickerEndDate" class="form-control" asp-for="STIWithSTKParameter.EndDate" placeholder="Bitiş Tarihi" />
-    </div>
-</div>
-
-<div class="form-group mt-3 d-grid gap-2 col-4 mx-auto">
-    <button type="submit" class="btn btn-primary" id="btnList">Listele</button>
-</div>
-
-<table class="table table-bordered table-hover table-responsive mt-3">
-    <thead>
-        <tr>
-            <th>Sira No</th>
-            <th>İşlem Türü</th>
-            <th>Evrak No</th>
-            <th>Miktar</th>
-            <th>Tarih</th>
-            <th>GirisMiktar</th>
-            <th>CikisMiktar</th>
-            <th>Stok</th>
-        </tr>
-    </thead>
-    @foreach (var item in Model.STI)
-    {
-        <tbody>
-            <tr>
-                <td>@item.SequenceNo</td>
-                <td>@item.TransactionType</td>
-                <td>@item.DocumentNo</td>
-                <td>@item.Quantity</td>
-                <td>@item.Date</td>
-                <td>@item.InputQuantity</td>
-                <td>@item.OutputQuantity</td>
-                <td>@item.Stock</td>
-            </tr>
-        </tbody>
-    }
-</table>
 
 @section Scripts{
-    <script type="text/javascript">
-        $("#datepickerStartDate").datepicker();
-        $("#datepickerEndDate").datepicker();
-
-        function getSTIList() {
-            var CommodityCode = $('#txtCommodityCode').val();
-            var StartDate= $('#datepickerStartDate').val();
-            var EndDate= $('#datepickerEndDate').val();
-            $.ajax({
-                type: "POST",
-                url: "/STI/GetSTIByParameter",
-                dataType: "json",
-                data: { commodityCode: CommodityCode, startDate: StartDate, endDate: EndDate },
-                success: function (response) {
-                    alert('Success');
-                },
-                error: function (response) {
-                    alert('Error' + response);
-                }
-            });
-        }
-
-        $('#btnList').click(function () {
-            getSTIList();
-        })
-
-        $(document).ready(function () {
-            //getSTIList();
-        });
-    </script>
+    <script src="~/js/pages/sti.js"></script>
 }
