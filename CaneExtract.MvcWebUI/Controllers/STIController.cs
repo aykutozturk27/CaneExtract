@@ -6,11 +6,11 @@ using Newtonsoft.Json;
 
 namespace CaneExtract.MvcWebUI.Controllers
 {
-    public class STIController : Controller
+    public class StiController : Controller
     {
         private readonly ISTIService _sTIService;
 
-        public STIController(ISTIService sTIService)
+        public StiController(ISTIService sTIService)
         {
             _sTIService = sTIService;
         }
@@ -27,7 +27,8 @@ namespace CaneExtract.MvcWebUI.Controllers
             var endDate = DateTime.Parse(stiWithSTKParameter.EndDate);
             var commodityCode = stiWithSTKParameter.CommodityCode;
             var list = _sTIService.GetAllWithParameters(SqlProsedure.GetAllWithParameters,
-                new STIWithSTKParameterDto() { CommodityCode = commodityCode, StartDateInt = Convert.ToInt32(startDate.ToOADate()), EndDateInt = Convert.ToInt32(endDate.ToOADate()) });
+                new STIWithSTKParameterDto() { CommodityCode = commodityCode, StartDateInt = Convert.ToInt32(startDate.ToOADate()), EndDateInt = Convert.ToInt32(endDate.ToOADate()),
+                StartDate = stiWithSTKParameter.StartDate, EndDate = stiWithSTKParameter.EndDate});
             return JsonConvert.SerializeObject(list);
         }
     }

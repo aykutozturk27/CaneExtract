@@ -1,6 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using CaneExtract.Business.DependencyResolvers.Autofac;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 });
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 
 var app = builder.Build();
 

@@ -1,5 +1,5 @@
-﻿myApp.controller('STIController', ['$scope', '$rootScope', '$http', '$filter' , 'NgTableParams', function ($scope, $rootScope, $http, $filter, NgTableParams) {
-    var stiWithSTKParameters = {
+﻿myApp.controller('StiController', ['$scope', '$rootScope', '$http', '$filter' , 'NgTableParams', function ($scope, $rootScope, $http, $filter, NgTableParams) {
+    $scope.stiWithSTKParameter = {
         CommodityCode: '1',
         StartDate: '',
         EndDate: ''
@@ -16,19 +16,19 @@
         }).val(endDate);
     }
 
-    $scope.changeDate = function (date) {
-        return $filter("date")(date, 'dd.MM.yyyy');
+    $scope.changeDate = function (input) {
+        return $filter("date")(new Date(input), 'dd.MM.yyyy');
     }
 
     $scope.loadStiList = function () {
-        stiWithSTKParameters.CommodityCode = $('#txtCommodityCode').val();
-        stiWithSTKParameters.StartDate = $('#dtpStartDate').val();
-        stiWithSTKParameters.EndDate = $('#dtpEndDate').val();
+        $scope.stiWithSTKParameter.CommodityCode = $('#txtCommodityCode').val();
+        $scope.stiWithSTKParameter.StartDate = $('#dtpStartDate').val();
+        $scope.stiWithSTKParameter.EndDate = $('#dtpEndDate').val();
         $http({
             method: "POST",
             url: "/STI/GetStiList",
             headers: { "Content-Type": "Application/json;charset=utf-8" },
-            data: { stiWithSTKParameter: stiWithSTKParameters }
+            params: $scope.stiWithSTKParameter 
         }).then(function (response) {
             $scope.stiList = response.data;
             $scope.tableStiParams = new NgTableParams({
