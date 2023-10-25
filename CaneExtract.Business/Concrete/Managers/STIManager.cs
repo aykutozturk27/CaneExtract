@@ -6,16 +6,16 @@ using CaneExtract.Entities.Dtos;
 
 namespace CaneExtract.Business.Concrete.Managers
 {
-    public class STIManager : ConnectionConfig, ISTIService
+    public class StiManager : ConnectionConfig, IStiService
     {
-        private readonly ISTIDal _sTIDal;
+        private readonly IStiDal _sTIDal;
 
-        public STIManager(ISTIDal sTIDal)
+        public StiManager(IStiDal sTIDal)
         {
             _sTIDal = sTIDal;
         }
 
-        public List<STI> GetAllWithParameters(string prosedureName, STIWithSTKParameterDto sTIWithSTKParameterDto)
+        public List<Sti> GetAllWithParameters(string prosedureName, StiWithStkParameterDto sTIWithSTKParameterDto)
         {
             var list = _sTIDal.ExecuteListStoreProsedure(prosedureName, sTIWithSTKParameterDto);
 

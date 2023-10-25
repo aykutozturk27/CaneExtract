@@ -2,7 +2,7 @@
 
 namespace CaneExtract.Entities.Concrete
 {
-    public class STI : IEntity
+    public class Sti : IEntity
     {
         public int ID { get; set; }
         public int SequenceNo { get; set; }//Sıra No

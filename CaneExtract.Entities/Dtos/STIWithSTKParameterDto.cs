@@ -2,7 +2,7 @@
 
 namespace CaneExtract.Entities.Dtos
 {
-    public class STIWithSTKParameterDto : IDto
+    public class StiWithStkParameterDto : IDto
     {
         public string? CommodityCode { get; set; }//Malkodu
         public int StartDateInt { get; set; }

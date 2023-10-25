@@ -3,8 +3,8 @@ using CaneExtract.Entities.Dtos;
 
 namespace CaneExtract.Business.Abstract
 {
-    public interface ISTIService
+    public interface IStiService
     {
-        List<STI> GetAllWithParameters(string prosedureName, STIWithSTKParameterDto sTIWithSTKParameterDto);
+        List<Sti> GetAllWithParameters(string prosedureName, StiWithStkParameterDto sTIWithSTKParameterDto);
     }
 }

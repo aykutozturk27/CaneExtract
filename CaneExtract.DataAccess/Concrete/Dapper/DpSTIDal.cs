@@ -4,7 +4,7 @@ using CaneExtract.Entities.Concrete;
 
 namespace CaneExtract.DataAccess.Concrete.Dapper
 {
-    public class DpSTIDal : DpEntityRepositoryBase<STI>, ISTIDal
+    public class DpStiDal : DpEntityRepositoryBase<Sti>, IStiDal
     {
     }
 }

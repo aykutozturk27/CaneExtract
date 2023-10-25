@@ -10,8 +10,8 @@ namespace CaneExtract.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<STIManager>().As<ISTIService>().SingleInstance();
-            builder.RegisterType<DpSTIDal>().As<ISTIDal>().SingleInstance();
+            builder.RegisterType<StiManager>().As<IStiService>().SingleInstance();
+            builder.RegisterType<DpStiDal>().As<IStiDal>().SingleInstance();
         }
     }
 }

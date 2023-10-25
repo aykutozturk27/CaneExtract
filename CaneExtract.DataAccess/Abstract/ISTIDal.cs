@@ -3,7 +3,7 @@ using CaneExtract.Entities.Concrete;
 
 namespace CaneExtract.DataAccess.Abstract
 {
-    public interface ISTIDal : IEntityRepository<STI>
+    public interface IStiDal : IEntityRepository<Sti>
     {
     }
 }
